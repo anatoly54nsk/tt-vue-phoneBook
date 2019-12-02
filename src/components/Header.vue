@@ -9,7 +9,7 @@
             <md-icon>add</md-icon>
             <md-tooltip md-direction="top">Добавить контакт</md-tooltip>
         </md-button>
-        <md-button class="md-icon-button md-raised" @click="refresh">
+        <md-button class="md-icon-button md-raised" @click="refresh" :disabled="currentPage !== 'home'">
             <md-icon>refresh</md-icon>
             <md-tooltip md-direction="top">Обновить</md-tooltip>
         </md-button>
@@ -35,7 +35,7 @@
                 this.$emit('add');
             },
             refresh() {
-                this.$emit('refresh');
+                this.$eventHub.$emit('refresh');
             },
         },
     }

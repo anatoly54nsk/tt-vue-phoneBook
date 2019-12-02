@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from "vue-router";
 import MainPage from "./components/MainPage";
-import {MdButton, MdToolbar, MdIcon, MdTooltip, MdCard, MdField} from 'vue-material/dist/components'
+import {MdButton, MdToolbar, MdIcon, MdTooltip, MdCard, MdField, MdProgress} from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default-dark.css'
 import './assets/css/google-fonts.css';
@@ -15,6 +15,9 @@ Vue.use(MdIcon);
 Vue.use(MdTooltip);
 Vue.use(MdCard);
 Vue.use(MdField);
+Vue.use(MdProgress);
+
+Vue.prototype.$eventHub = new Vue();
 
 const routes = [
     {path: '/', component: MainPage},

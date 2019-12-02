@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Header :title="'Phone|kooB'" :currentPage="currentPage" @home="home"></Header>
+        <Header :title="'Phone|kooB'" :currentPage="currentPage" @home="home" @add="add" @refresh="refresh"></Header>
         <router-view></router-view>
     </div>
 </template>
@@ -27,16 +27,16 @@
                 this.selectCurrentRoute();
             },
             refresh() {
-
+                this.$eventHub.$emit('refresh');
             },
             selectCurrentRoute() {
-              const path = this.$router.currentRoute.path;
-              if (path === '/') {
-                  this.currentPage = 'home';
-              }
-              if (path.includes('/add')) {
-                  this.currentPage = 'add';
-              }
+                const path = this.$router.currentRoute.path;
+                if (path === '/') {
+                    this.currentPage = 'home';
+                }
+                if (path.includes('/add')) {
+                    this.currentPage = 'add';
+                }
             },
         },
     }
