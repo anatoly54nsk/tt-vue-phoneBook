@@ -21,7 +21,7 @@
         },
         methods: {
             search() {
-                this.$emit('search', this.query)
+                this.$emit('search', this.query);
             },
         },
     }
