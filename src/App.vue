@@ -43,4 +43,8 @@
 </script>
 
 <style>
+    .page {
+        width: 1100px;
+        margin: 0 auto;
+    }
 </style>
