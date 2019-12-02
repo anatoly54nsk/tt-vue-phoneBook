@@ -1,5 +1,6 @@
 <template>
     <div class="page">
+        <Search @search="filterList"></Search>
         <ContactList :list="filteredContactList"></ContactList>
     </div>
 </template>
@@ -7,11 +8,13 @@
 <script>
     import ContactsApi from "../services/ContactsApi";
     import ContactList from "./ContactList";
+    import Search from "./Search";
 
     export default {
         name: "MainPage",
         components: {
-            ContactList
+            ContactList,
+            Search,
         },
         data() {
             return {
@@ -24,12 +27,12 @@
                 ContactsApi.getContacts()
                     .then(list => {
                         this.contactList = list;
-                        this.filteredContactList = this.filterList();
+                        this.filterList();
                     })
             },
             filterList(query = null) {
-                return query ?
-                    this.contactList.filter(contact => Object.values(contact).join('').includes(query))
+                this.filteredContactList = query ?
+                    this.contactList.filter(contact => Object.values(contact).join('').toLowerCase().includes(query))
                     : this.contactList;
             },
             edit(id) {
