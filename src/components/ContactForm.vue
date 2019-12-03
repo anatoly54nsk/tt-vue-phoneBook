@@ -114,21 +114,18 @@
                     }
                 }
             },
-            add() {
+            _modify(eventName) {
                 if (this.validateForm()) {
-                    const contact = {...this.contact};
-                    contact.phone = this.preparePhone(contact.phone);
+                    const contact = Object.assign({}, this.contact, {phone: this.preparePhone(this.contact.phone)});
                     this.$v.$reset();
-                    this.$emit('add', contact);
+                    this.$emit(eventName, contact);
                 }
             },
+            add() {
+                this._modify('add');
+            },
             update() {
-                if (this.validateForm()) {
-                    const contact = {...this.contact};
-                    contact.phone = this.preparePhone(contact.phone);
-                    this.$v.$reset();
-                    this.$emit('update', contact);
-                }
+                this._modify('update');
             },
             preparePhone(phone) {
                 let phoneParts = phone.match(phonePattern);
