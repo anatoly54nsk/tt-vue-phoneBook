@@ -1,17 +1,17 @@
 <template>
     <div class="page">
-        <Search @search="filterList"></Search>
+        <Search @search="setQuery"></Search>
         <ContactList v-if="!updating" :list="filteredContactList" @edit="edit" @remove="remove"></ContactList>
         <div class="spinner">
-            <md-progress-spinner v-if="updating" md-mode="indeterminate"  class="md-accent"></md-progress-spinner>
+            <md-progress-spinner v-if="updating" md-mode="indeterminate" class="md-accent"></md-progress-spinner>
         </div>
     </div>
 </template>
 
 <script>
-    import ContactsApi from "../services/ContactsApi";
     import ContactList from "./ContactList";
     import Search from "./Search";
+    import contactApi from '../services/HerokuApi';
 
     export default {
         name: "MainPage",
@@ -21,42 +21,51 @@
         },
         data() {
             return {
-                contactList: {},
-                filteredContactList: {},
+                query: '',
+                contactList: [],
+                filteredContactList: [],
                 updating: false,
+                subList: [],
             }
         },
         methods: {
-            update() {
-                this.updating = true;
-                ContactsApi.getContacts()
-                    .then(list => {
-                        this.updating = false;
-                        this.contactList = list;
-                        this.filterList();
-                    });
+            update(list) {
+                this.updating = false;
+                this.contactList = list;
+                this.filterList();
             },
-            filterList(query = null) {
-                this.filteredContactList = query ?
-                    this.contactList.filter(contact => Object.values(contact).join('').toLowerCase().includes(query.toLowerCase()))
-                    : this.contactList;
+            setQuery(query) {
+                this.query = query.toLowerCase();
+                this.filterList();
+            },
+            contactMatchesQuery: function (contact) {
+                return Object.values(contact).join(' ').toLowerCase().includes(this.query);
+            },
+            filterList() {
+                this.filteredContactList = this.query ?
+                    this.contactList
+                        .filter(contact => this.contactMatchesQuery(contact))
+                    : this.contactList.slice(0);
             },
             edit(id) {
-                window.console.log(id);
                 this.$router.push(`/edit/${id}`);
             },
             remove(id) {
-                ContactsApi.deleteContact(id).then(
-                    () => this.update()
+                contactApi.delete(id).then(
+                    () => contactApi.list()
                 );
             },
         },
         created() {
-            this.$eventHub.$on('refresh', this.update);
-            this.update();
+            this.subList.push(contactApi.observer.sub('update-start', () => this.updating = true));
+            this.subList.push(contactApi.observer.sub('update', ({data}) => {
+                this.updating = false;
+                this.update(data);
+            }));
+            contactApi.list();
         },
         beforeDestroy() {
-            this.$eventHub.$off('refresh');
+            this.subList.forEach(unSub => unSub());
         },
     }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Header :title="'Phone|kooB'" @home="home" @add="add" @refresh="refresh"></Header>
+        <Header :title="'Phone|kooB'"></Header>
         <router-view :key="$route.fullPath"></router-view>
     </div>
 </template>
@@ -12,17 +12,6 @@
     export default {
         name: 'app',
         components: {Header},
-        methods: {
-            home() {
-                if (this.$router.currentRoute.path !== '/') this.$router.push('/');
-            },
-            add() {
-                if (!this.$router.currentRoute.path.includes('/add')) this.$router.push('/add');
-            },
-            refresh() {
-                this.$eventHub.$emit('refresh');
-            },
-        },
     }
 </script>
 

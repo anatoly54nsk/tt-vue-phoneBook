@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <h1 class="no-variants" v-if="list.length===0">Нет похожих контактов</h1>
+        <h1 class="no-variants" v-if="list && list.length===0">Нет похожих контактов</h1>
         <div class="contact-list">
             <ContactCard v-for="contact in list"
                          :contact="contact"
@@ -21,7 +21,7 @@
             ContactCard
         },
         props: {
-            list: {},
+            list: Array,
         },
         methods: {
             edit(id) {

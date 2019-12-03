@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import ContactsApi from "../services/ContactsApi";
+    import contactApi from "../services/HerokuApi";
     import ContactForm from "./ContactForm";
 
     export default {
@@ -34,20 +34,12 @@
         },
         methods: {
             add(contact) {
-                ContactsApi.createContact({data: contact})
-                    .then(
-                        () => {
-                            this.afterSave();
-                        }
-                    );
+                contactApi.create(contact)
+                    .then(() => this.afterSave());
             },
             update(contact) {
-                ContactsApi.updateContact({data: contact})
-                    .then(
-                        () => {
-                            this.afterSave();
-                        }
-                    );
+                contactApi.update(contact)
+                    .then(() => this.afterSave());
             },
             afterSave() {
                 this.contactSaved = true;
@@ -57,10 +49,9 @@
             },
         },
         created() {
-            window.console.log(this.$router.currentRoute.path);
-            if (this.$router.currentRoute.path.includes('/edit')) {
-                ContactsApi.getContact(this.$router.currentRoute.params.id)
-                    .then(contact => this.contact = contact.data);
+            if (this.$router.currentRoute.params.id) {
+                contactApi.get(this.$router.currentRoute.params.id)
+                    .then(contact => this.contact = contact);
                 this.formMode = 'update';
             }
         },
