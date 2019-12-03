@@ -6,8 +6,11 @@ import {MdButton, MdToolbar, MdIcon, MdTooltip, MdCard, MdField, MdProgress} fro
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default-dark.css'
 import './assets/css/google-fonts.css';
+import EditPage from "./components/EditPage";
 
 Vue.config.productionTip = false;
+Vue.prototype.$eventHub = new Vue();
+
 Vue.use(VueRouter);
 Vue.use(MdButton);
 Vue.use(MdToolbar);
@@ -17,10 +20,10 @@ Vue.use(MdCard);
 Vue.use(MdField);
 Vue.use(MdProgress);
 
-Vue.prototype.$eventHub = new Vue();
-
 const routes = [
     {path: '/', component: MainPage},
+    {path: '/add', component: EditPage},
+    {path: '/edit/:id', component: EditPage},
 ];
 
 const router = new VueRouter({routes});

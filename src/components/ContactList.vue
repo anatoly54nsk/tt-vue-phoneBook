@@ -25,10 +25,10 @@
         },
         methods: {
             edit(id) {
-                this.emit('edit', id);
+                this.$emit('edit', id);
             },
             remove(id) {
-                this.emit('remove', id);
+                this.$emit('remove', id);
             },
         },
     }

@@ -1,7 +1,7 @@
 <template>
     <div class="page">
         <Search @search="filterList"></Search>
-        <ContactList v-if="!updating" :list="filteredContactList"></ContactList>
+        <ContactList v-if="!updating" :list="filteredContactList" @edit="edit" @remove="remove"></ContactList>
         <div class="spinner">
             <md-progress-spinner v-if="updating" md-mode="indeterminate"  class="md-accent"></md-progress-spinner>
         </div>
@@ -28,14 +28,13 @@
         },
         methods: {
             update() {
-                window.console.log('refresh 2');
                 this.updating = true;
                 ContactsApi.getContacts()
                     .then(list => {
                         this.updating = false;
                         this.contactList = list;
                         this.filterList();
-                    })
+                    });
             },
             filterList(query = null) {
                 this.filteredContactList = query ?
@@ -43,10 +42,13 @@
                     : this.contactList;
             },
             edit(id) {
-                this.$emit('edit', id);
+                window.console.log(id);
+                this.$router.push(`/edit/${id}`);
             },
             remove(id) {
-                this.$emit('remove', id);
+                ContactsApi.deleteContact(id).then(
+                    () => this.update()
+                );
             },
         },
         created() {

@@ -23,8 +23,7 @@
                 this.selectCurrentRoute();
             },
             add() {
-                this.$router.push('/add');
-                this.selectCurrentRoute();
+                if (!this.$router.currentRoute.path.includes('/add')) this.$router.push('/add');
             },
             refresh() {
                 this.$eventHub.$emit('refresh');
