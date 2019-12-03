@@ -38,7 +38,7 @@
             },
             filterList(query = null) {
                 this.filteredContactList = query ?
-                    this.contactList.filter(contact => Object.values(contact).join('').toLowerCase().includes(query))
+                    this.contactList.filter(contact => Object.values(contact).join('').toLowerCase().includes(query.toLowerCase()))
                     : this.contactList;
             },
             edit(id) {
