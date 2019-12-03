@@ -1,7 +1,4 @@
 export class ContactApi {
-    http;
-    observer;
-
     /**
      *
      * @param http

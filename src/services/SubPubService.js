@@ -1,5 +1,8 @@
 export class SubPubService {
-    listeners = {};
+
+    constructor() {
+        this.listeners = {};
+    }
 
     sub(event, listener) {
         if (!this.listeners[event]) {
