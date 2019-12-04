@@ -36,7 +36,6 @@ describe('SubPubService', () => {
         expect(fn).toBeCalledTimes(1);
         expect(fn2).toBeCalledTimes(1);
         expect(fn3).toBeCalledTimes(1);
-        ;
     });
 
     it('should off unsubscribe listener', () => {
