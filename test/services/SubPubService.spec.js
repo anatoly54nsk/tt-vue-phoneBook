@@ -65,8 +65,8 @@ describe('SubPubService', () => {
         obs.off('event');
         obs.pub('event');
 
-        expect(fn).not.toBeCalledTimes(2);
-        expect(fn2).not.toBeCalledTimes(2);
+        expect(fn).toBeCalledTimes(1);
+        expect(fn2).toBeCalledTimes(1);
     });
 
     it('should off unsubscribe only listeners passed by the second parameter', () => {
@@ -82,7 +82,7 @@ describe('SubPubService', () => {
         obs.off('event', fn);
         obs.pub('event');
 
-        expect(fn).not.toBeCalledTimes(2);
+        expect(fn).toBeCalledTimes(1);
         expect(fn2).toBeCalledTimes(2);
     });
 });
