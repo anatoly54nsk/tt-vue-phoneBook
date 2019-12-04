@@ -24,9 +24,6 @@
                 this.$emit('search', this.query);
             },
         },
-        created() {
-            this.$eventHub.$on('refresh', () => this.query = '');
-        }
     }
 </script>
 
