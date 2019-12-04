@@ -85,4 +85,13 @@ describe('SubPubService', () => {
         expect(fn).toBeCalledTimes(1);
         expect(fn2).toBeCalledTimes(2);
     });
+
+    it('should fn called with params', () => {
+        const fn = jest.fn();
+        obs.sub('event', fn);
+
+        obs.pub('event', 1);
+
+        expect(fn).toBeCalledWith({event: 'event', data: 1})
+    });
 });
