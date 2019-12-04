@@ -2,14 +2,13 @@ import {SubPubService} from "../../src/services/SubPubService";
 
 describe('SubPubService', () => {
     let obs;
-    let fn;
 
     beforeEach(() => {
-        fn = jest.fn();
         obs = new SubPubService()
     });
 
     it('should sub subscriber', () => {
+        const fn = jest.fn();
         obs.sub('event', fn);
 
         obs.pub('event');
@@ -17,6 +16,7 @@ describe('SubPubService', () => {
     });
 
     it('should function returned from sub unsubscribe', () => {
+        const fn = jest.fn();
         const unSubFn = obs.sub('event', fn);
 
         unSubFn('event');
@@ -26,6 +26,7 @@ describe('SubPubService', () => {
     });
 
     it('should pub call all subscribers', () => {
+        const fn = jest.fn();
         const fn2 = jest.fn();
         const fn3 = jest.fn();
         obs.sub('event', fn);
@@ -39,6 +40,7 @@ describe('SubPubService', () => {
     });
 
     it('should off unsubscribe listener', () => {
+        const fn = jest.fn();
         obs.sub('event', fn);
         obs.pub('event');
 
@@ -51,6 +53,7 @@ describe('SubPubService', () => {
     });
 
     it('should off unsubscribe all listeners without second param', () => {
+        const fn = jest.fn();
         const fn2 = jest.fn();
         obs.sub('event', fn);
         obs.sub('event', fn2);
@@ -67,6 +70,7 @@ describe('SubPubService', () => {
     });
 
     it('should off unsubscribe only listeners passed by the second parameter', () => {
+        const fn = jest.fn();
         const fn2 = jest.fn();
         obs.sub('event', fn);
         obs.sub('event', fn2);
