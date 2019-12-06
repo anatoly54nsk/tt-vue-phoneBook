@@ -16,10 +16,10 @@
             </div>
         </md-card-content>
         <md-card-actions>
-            <md-button @click="edit" class="md-accent">Edit</md-button>
+            <md-button @click="edit" class="md-accent contact-card__button_edit">Edit</md-button>
         </md-card-actions>
         <md-card-actions>
-            <md-button @click="remove" class="md-accent">Delete</md-button>
+            <md-button @click="remove" class="md-accent contact-card__button_remove">Delete</md-button>
         </md-card-actions>
     </md-card>
 </template>
