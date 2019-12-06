@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContactCard should render correctly 1`] = `
+<div
+  class="md-card card md-theme-default"
+>
+  <div
+    class="md-card-header md-card-header-flex"
+  >
+    <div
+      class="md-card-header-text"
+    >
+      <div
+        class="md-title"
+      >
+        exampleName
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="md-card-content"
+  >
+    <div>
+      <i
+        class="md-icon md-icon-font md-accent md-theme-default"
+      >
+        phone
+      </i>
+       
+      <span
+        class="field"
+      >
+        +78923334444
+      </span>
+    </div>
+     
+    <div>
+      <i
+        class="md-icon md-icon-font md-accent md-theme-default"
+      >
+        email
+      </i>
+       
+      <span
+        class="field"
+      >
+        example@example.exmpl
+      </span>
+    </div>
+  </div>
+   
+  <div
+    class="md-card-actions md-alignment-right"
+  >
+    <button
+      class="md-button md-accent contact-card__button_edit md-theme-default"
+      type="button"
+    >
+      <div
+        class="md-ripple"
+      >
+        <div
+          class="md-button-content"
+        >
+          Edit
+        </div>
+         
+      </div>
+    </button>
+  </div>
+   
+  <div
+    class="md-card-actions md-alignment-right"
+  >
+    <button
+      class="md-button md-accent contact-card__button_remove md-theme-default"
+      type="button"
+    >
+      <div
+        class="md-ripple"
+      >
+        <div
+          class="md-button-content"
+        >
+          Delete
+        </div>
+         
+      </div>
+    </button>
+  </div>
+</div>
+`;
