@@ -35,7 +35,7 @@ describe('ContactApi', () => {
 
         expect(obsCalls['update-start']).not.toBeUndefined();
         expect(obsCalls['update']).not.toBeUndefined();
-        expect(obsCalls['update']).toBeGreaterThan(obsCalls['update-start']);
+        expect(obsCalls['update']).toBeGreaterThanOrEqual(obsCalls['update-start']);
 
         expect(fn.mock.calls[0][0]).toEqual(list)
     });
@@ -60,7 +60,6 @@ describe('ContactApi', () => {
 
         svc.get('3').then(fn, rej);
 
-        let item = {id: '1', name: '3', phone: '123', email: 'assa@saa.lss'};
         mockAxios.mockError(new Error('Not Found'));
 
         expect(rej).toHaveBeenCalled();
